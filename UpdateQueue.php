@@ -3,24 +3,20 @@
 if (isset($_POST['submit'])) {
     require 'connect.php';
 
-
-
-
     $stmt = $conn->prepare(
         'UPDATE queue SET 
         QDate = :QDate,
         QNumber = :QNumber,
         Pid = :Pid,
         Qstatus = :QStatus
-        Where 
-        QDate =:QDate AND
-        QNumber =:QNumber'
+        WHERE 
+        QDate = :QDate AND
+        QNumber = :QNumber'
     );
-    $stmt->bindParam(':QDate',$_POST['QDate']);
-    $stmt->bindParam('QNumber',$_POST['QNumber']);
-    $stmt->bindParam(':Pid',$_POST['Pid'] );
-    $stmt->bindParam(':QStatus', $_POST['QStatus'] );
-
+    $stmt->bindParam(':QDate', $_POST['QDate']);
+    $stmt->bindParam(':QNumber', $_POST['QNumber']);
+    $stmt->bindParam(':Pid', $_POST['Pid']);
+    $stmt->bindParam(':QStatus', $_POST['QStatus']);
 
     echo '
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
@@ -35,7 +31,7 @@ if (isset($_POST['submit'])) {
         
             swal({
                 title: "Success!",
-                text: "Successfuly update customer information",
+                text: "Successfully updated customer information",
                 type: "success",
                 timer: 2500,
                 showConfirmButton: false
@@ -49,3 +45,4 @@ if (isset($_POST['submit'])) {
     }
     $conn = null;
 }
+?>
